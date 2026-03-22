@@ -5,23 +5,33 @@ const bookingSlots = [
   "9:00 AM – 10:00 AM",
   "10:00 AM – 11:00 AM",
   "11:00 AM – 12:00 PM",
+  "12:00 PM – 1:00 PM",
+  "1:00 PM – 2:00 PM",
+  "2:00 PM – 3:00 PM",
+  "3:00 PM – 4:00 PM",
+  "6:00 PM – 7:00 PM",
+  "7:00 PM – 8:00 PM",
+  "8:00 PM – 9:00 PM",
+  "9:00 PM – 10:00 PM",
+  "10:00 PM – 11:00 PM",
+  "11:00 PM – 12:00 AM",
 ];
 
 const surfaceCards = [
   {
-    title: "Grass Turf Surface 1",
+    title: "Grass Turf Lane 1",
     description:
-      "A natural-style grass turf practice area designed for realistic cricket net training.",
+      "A grass turf practice lane built for realistic cricket training and repeated net sessions.",
   },
   {
-    title: "Grass Turf Surface 2",
+    title: "Grass Turf Lane 2",
     description:
-      "A similar grass turf setup that helps players build rhythm, timing, and consistency.",
+      "A similar grass turf lane that helps players train in consistent and match-like conditions.",
   },
   {
-    title: "Grass Turf Surface 3",
+    title: "Grass Turf Lane 3",
     description:
-      "A matching grass turf lane for repeated technical training in a familiar playing condition.",
+      "A matching grass turf lane for stable, high-repetition cricket practice throughout the day.",
   },
 ];
 
@@ -82,9 +92,9 @@ Phone: ${booking.phone || "-"}`;
               Book Faster. Train Better.
             </h1>
             <p className="text-lg text-slate-200 mb-8 max-w-2xl">
-              A clean and modern cricket net booking website that helps players
-              choose slots, understand net details, and chat directly with the
-              owner on WhatsApp.
+              A modern cricket net booking website that helps players choose
+              available slots, view net details, and contact the owner directly
+              on WhatsApp.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-10">
@@ -131,10 +141,10 @@ Phone: ${booking.phone || "-"}`;
       <section className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-white rounded-3xl shadow p-6">
-            <h3 className="text-xl font-bold mb-3">Easy Net Booking</h3>
+            <h3 className="text-xl font-bold mb-3">Flexible Booking</h3>
             <p className="text-slate-600">
-              Players can choose available morning booking slots and send their
-              booking request directly through WhatsApp.
+              Net slots are available from 8:00 AM to 12:00 AM, except during
+              coaching hours from 4:00 PM to 6:00 PM.
             </p>
           </div>
           <div className="bg-white rounded-3xl shadow p-6">
@@ -147,8 +157,8 @@ Phone: ${booking.phone || "-"}`;
           <div className="bg-white rounded-3xl shadow p-6">
             <h3 className="text-xl font-bold mb-3">Grass Turf Surface</h3>
             <p className="text-slate-600">
-              Practice takes place on grass turf conditions for a more realistic
-              and consistent training environment.
+              Training takes place on similar grass turf lanes for realistic and
+              consistent cricket practice conditions.
             </p>
           </div>
         </div>
@@ -167,7 +177,7 @@ Phone: ${booking.phone || "-"}`;
                   One cricket net for focused training and slot-based bookings.
                 </li>
                 <li className="bg-slate-50 rounded-2xl p-4">
-                  Three similar grass turf surface lanes for repeated practice in
+                  Three similar grass turf lanes for repeated practice in
                   consistent conditions.
                 </li>
                 <li className="bg-slate-50 rounded-2xl p-4">
@@ -201,10 +211,12 @@ Phone: ${booking.phone || "-"}`;
         <div className="grid md:grid-cols-2 gap-10">
           <div>
             <p className="text-green-700 font-semibold mb-2">Coaching Hours</p>
-            <h2 className="text-3xl font-bold mb-4">Academy Coaching Timings</h2>
+            <h2 className="text-3xl font-bold mb-4">
+              Academy Coaching Timings
+            </h2>
             <p className="text-slate-600 mb-6">
-              Coaching runs separately during fixed academy hours and is not part
-              of the net booking slots.
+              Coaching takes place during fixed academy timings and those hours
+              are excluded from public net booking.
             </p>
 
             <div className="bg-white rounded-3xl p-6 shadow space-y-4">
@@ -217,8 +229,8 @@ Phone: ${booking.phone || "-"}`;
                 <span>4:00 PM – 6:00 PM</span>
               </div>
               <div className="flex justify-between text-sm text-slate-600">
-                <span>Booking Availability</span>
-                <span>8:00 AM – 12:00 PM</span>
+                <span>Public Booking Window</span>
+                <span>8:00 AM – 12:00 AM</span>
               </div>
             </div>
           </div>
@@ -227,13 +239,18 @@ Phone: ${booking.phone || "-"}`;
             <p className="text-green-700 font-semibold mb-2">Net Details</p>
             <h2 className="text-3xl font-bold mb-4">Booking Information</h2>
             <p className="text-slate-600 mb-6">
-              Net slot bookings are available only outside coaching timings.
+              Net slot bookings are available from morning until midnight, with
+              the 4:00 PM to 6:00 PM coaching block excluded.
             </p>
 
             <div className="bg-white rounded-3xl p-6 shadow space-y-4">
               <div className="flex justify-between text-sm text-slate-600">
                 <span>Practice Slot Timings</span>
-                <span>8:00 AM – 12:00 PM</span>
+                <span>8:00 AM – 12:00 AM</span>
+              </div>
+              <div className="flex justify-between text-sm text-slate-600">
+                <span>Coaching Exception</span>
+                <span>4:00 PM – 6:00 PM</span>
               </div>
               <div className="flex justify-between text-sm text-slate-600">
                 <span>Net Type</span>
@@ -259,14 +276,18 @@ Phone: ${booking.phone || "-"}`;
                 Reserve your Net slot
               </h2>
               <p className="text-slate-600 mb-6">
-                Players can fill in their slot details and send the booking
-                request directly through WhatsApp.
+                Choose your preferred time slot and send the booking request
+                directly to the owner on WhatsApp.
               </p>
 
               <div className="bg-white rounded-3xl p-6 shadow space-y-4">
                 <div className="flex justify-between text-sm text-slate-600">
                   <span>Booking Hours</span>
-                  <span>8:00 AM – 12:00 PM</span>
+                  <span>8:00 AM – 12:00 AM</span>
+                </div>
+                <div className="flex justify-between text-sm text-slate-600">
+                  <span>Coaching Exception</span>
+                  <span>4:00 PM – 6:00 PM</span>
                 </div>
                 <div className="flex justify-between text-sm text-slate-600">
                   <span>Net Type</span>
