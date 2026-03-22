@@ -1,40 +1,37 @@
 import { useMemo, useState } from "react";
 
 const bookingSlots = [
-  "6:00 AM – 7:00 AM",
-  "7:00 AM – 8:00 AM",
   "8:00 AM – 9:00 AM",
   "9:00 AM – 10:00 AM",
   "10:00 AM – 11:00 AM",
   "11:00 AM – 12:00 PM",
 ];
 
-const surfaces = [
+const surfaceCards = [
   {
-    title: "Turf Surface",
+    title: "Grass Turf Surface 1",
     description:
-      "Practice on standard turf conditions to improve timing, movement, and match readiness.",
+      "A natural-style grass turf practice area designed for realistic cricket net training.",
   },
   {
-    title: "Cement Surface",
+    title: "Grass Turf Surface 2",
     description:
-      "Train on a quicker surface to sharpen reflexes, control, and shot adjustment.",
+      "A similar grass turf setup that helps players build rhythm, timing, and consistency.",
   },
   {
-    title: "Matting Surface",
+    title: "Grass Turf Surface 3",
     description:
-      "Build consistency and technique through controlled training on matting.",
+      "A matching grass turf lane for repeated technical training in a familiar playing condition.",
   },
 ];
 
-const whatsappNumber = "919999999999";
+const whatsappNumber = "918555973913";
 
 export default function App() {
   const [booking, setBooking] = useState({
     playerName: "",
     date: "",
     slot: "",
-    sessionType: "",
     phone: "",
   });
 
@@ -46,7 +43,6 @@ export default function App() {
 Player Name: ${booking.playerName || "-"}
 Date: ${booking.date || "-"}
 Time Slot: ${booking.slot || "-"}
-Practice Type: ${booking.sessionType || "-"}
 Phone: ${booking.phone || "-"}`;
     return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
   }, [booking]);
@@ -65,14 +61,13 @@ Phone: ${booking.phone || "-"}`;
       !booking.playerName.trim() ||
       !booking.date.trim() ||
       !booking.slot.trim() ||
-      !booking.sessionType.trim() ||
       !booking.phone.trim()
     ) {
       setBookingMessage("Please fill in all booking details first.");
       return;
     }
 
-    setBookingMessage("Your booking details are ready to send on WhatsApp.");
+    setBookingMessage("Your net booking details are ready to send on WhatsApp.");
   }
 
   return (
@@ -88,8 +83,8 @@ Phone: ${booking.phone || "-"}`;
             </h1>
             <p className="text-lg text-slate-200 mb-8 max-w-2xl">
               A clean and modern cricket net booking website that helps players
-              choose slots, explore available surfaces, and chat directly with
-              the owner on WhatsApp.
+              choose slots, understand net details, and chat directly with the
+              owner on WhatsApp.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-10">
@@ -97,11 +92,11 @@ Phone: ${booking.phone || "-"}`;
                 href="#book"
                 className="bg-white text-slate-900 px-6 py-3 rounded-2xl font-semibold shadow hover:scale-[1.02] transition"
               >
-                Book Practice Net
+                Book Net Slot
               </a>
               <a
                 href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-                  "Hello, I would like to know more about cricket net bookings."
+                  "Hello, I would like to contact the owner about cricket net bookings."
                 )}`}
                 target="_blank"
                 rel="noreferrer"
@@ -122,11 +117,11 @@ Phone: ${booking.phone || "-"}`;
               </div>
               <div className="bg-white/10 rounded-2xl p-4">
                 <p className="text-3xl font-bold">1</p>
-                <p className="text-sm text-slate-200">Big Practice Net</p>
+                <p className="text-sm text-slate-200">Cricket Net</p>
               </div>
               <div className="bg-white/10 rounded-2xl p-4">
                 <p className="text-3xl font-bold">3</p>
-                <p className="text-sm text-slate-200">Surfaces</p>
+                <p className="text-sm text-slate-200">Grass Turf Lanes</p>
               </div>
             </div>
           </div>
@@ -136,24 +131,24 @@ Phone: ${booking.phone || "-"}`;
       <section className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-white rounded-3xl shadow p-6">
-            <h3 className="text-xl font-bold mb-3">Easy Booking</h3>
+            <h3 className="text-xl font-bold mb-3">Easy Net Booking</h3>
             <p className="text-slate-600">
-              Players can choose available morning time slots and send booking
-              details directly through WhatsApp.
+              Players can choose available morning booking slots and send their
+              booking request directly through WhatsApp.
             </p>
           </div>
           <div className="bg-white rounded-3xl shadow p-6">
-            <h3 className="text-xl font-bold mb-3">One Large Net</h3>
+            <h3 className="text-xl font-bold mb-3">One Cricket Net</h3>
             <p className="text-slate-600">
-              The facility offers one large cricket practice net for focused
-              training sessions and structured practice.
+              The facility offers one dedicated cricket net for focused batting
+              and bowling practice.
             </p>
           </div>
           <div className="bg-white rounded-3xl shadow p-6">
-            <h3 className="text-xl font-bold mb-3">Three Surfaces</h3>
+            <h3 className="text-xl font-bold mb-3">Grass Turf Surface</h3>
             <p className="text-slate-600">
-              Train across different batting and bowling surfaces to improve
-              adaptability and performance.
+              Practice takes place on grass turf conditions for a more realistic
+              and consistent training environment.
             </p>
           </div>
         </div>
@@ -165,28 +160,27 @@ Phone: ${booking.phone || "-"}`;
             <div>
               <p className="text-green-700 font-semibold mb-2">Why Choose Us</p>
               <h2 className="text-3xl font-bold mb-4">
-                One large net with multiple practice surfaces
+                One cricket net with consistent grass turf conditions
               </h2>
               <ul className="space-y-4 text-slate-700">
                 <li className="bg-slate-50 rounded-2xl p-4">
-                  One large practice net for focused cricket training and
-                  bookings.
+                  One cricket net for focused training and slot-based bookings.
                 </li>
                 <li className="bg-slate-50 rounded-2xl p-4">
-                  Three different batting and bowling surfaces for varied
-                  practice conditions.
+                  Three similar grass turf surface lanes for repeated practice in
+                  consistent conditions.
                 </li>
                 <li className="bg-slate-50 rounded-2xl p-4">
-                  Simple online booking and direct WhatsApp contact for quick
+                  Direct WhatsApp contact with the owner for simple and quick
                   coordination.
                 </li>
               </ul>
             </div>
 
             <div className="bg-slate-50 rounded-3xl p-6 shadow">
-              <h3 className="text-2xl font-bold mb-4">Practice Surfaces</h3>
+              <h3 className="text-2xl font-bold mb-4">Grass Turf Lanes</h3>
               <div className="space-y-4">
-                {surfaces.map((surface) => (
+                {surfaceCards.map((surface) => (
                   <div
                     key={surface.title}
                     className="bg-white rounded-2xl p-4 border border-slate-200"
@@ -203,6 +197,57 @@ Phone: ${booking.phone || "-"}`;
         </div>
       </section>
 
+      <section className="max-w-6xl mx-auto px-6 py-16">
+        <div className="grid md:grid-cols-2 gap-10">
+          <div>
+            <p className="text-green-700 font-semibold mb-2">Coaching Hours</p>
+            <h2 className="text-3xl font-bold mb-4">Academy Coaching Timings</h2>
+            <p className="text-slate-600 mb-6">
+              Coaching runs separately during fixed academy hours and is not part
+              of the net booking slots.
+            </p>
+
+            <div className="bg-white rounded-3xl p-6 shadow space-y-4">
+              <div className="flex justify-between text-sm text-slate-600">
+                <span>Morning Coaching</span>
+                <span>6:00 AM – 8:00 AM</span>
+              </div>
+              <div className="flex justify-between text-sm text-slate-600">
+                <span>Evening Coaching</span>
+                <span>4:00 PM – 6:00 PM</span>
+              </div>
+              <div className="flex justify-between text-sm text-slate-600">
+                <span>Booking Availability</span>
+                <span>8:00 AM – 12:00 PM</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p className="text-green-700 font-semibold mb-2">Net Details</p>
+            <h2 className="text-3xl font-bold mb-4">Booking Information</h2>
+            <p className="text-slate-600 mb-6">
+              Net slot bookings are available only outside coaching timings.
+            </p>
+
+            <div className="bg-white rounded-3xl p-6 shadow space-y-4">
+              <div className="flex justify-between text-sm text-slate-600">
+                <span>Practice Slot Timings</span>
+                <span>8:00 AM – 12:00 PM</span>
+              </div>
+              <div className="flex justify-between text-sm text-slate-600">
+                <span>Net Type</span>
+                <span>1 Cricket Net</span>
+              </div>
+              <div className="flex justify-between text-sm text-slate-600">
+                <span>Surface Type</span>
+                <span>Grass Turf</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="book" className="bg-slate-100">
         <div className="max-w-6xl mx-auto px-6 py-16">
           <div className="grid md:grid-cols-2 gap-10">
@@ -211,7 +256,7 @@ Phone: ${booking.phone || "-"}`;
                 Net Booking
               </p>
               <h2 className="text-3xl font-bold mb-4">
-                Reserve your practice slot
+                Reserve your Net slot
               </h2>
               <p className="text-slate-600 mb-6">
                 Players can fill in their slot details and send the booking
@@ -221,15 +266,15 @@ Phone: ${booking.phone || "-"}`;
               <div className="bg-white rounded-3xl p-6 shadow space-y-4">
                 <div className="flex justify-between text-sm text-slate-600">
                   <span>Booking Hours</span>
-                  <span>6:00 AM – 12:00 PM</span>
+                  <span>8:00 AM – 12:00 PM</span>
                 </div>
                 <div className="flex justify-between text-sm text-slate-600">
-                  <span>Net Setup</span>
-                  <span>1 Big Practice Net</span>
+                  <span>Net Type</span>
+                  <span>1 Cricket Net</span>
                 </div>
                 <div className="flex justify-between text-sm text-slate-600">
-                  <span>Surface Options</span>
-                  <span>Turf • Cement • Matting</span>
+                  <span>Surface Type</span>
+                  <span>Grass Turf</span>
                 </div>
               </div>
             </div>
@@ -254,31 +299,16 @@ Phone: ${booking.phone || "-"}`;
                 onChange={(e) => handleBookingChange("date", e.target.value)}
               />
 
-              <div className="grid grid-cols-2 gap-4">
-                <select
-                  className="w-full border border-slate-300 rounded-2xl px-4 py-3"
-                  value={booking.slot}
-                  onChange={(e) => handleBookingChange("slot", e.target.value)}
-                >
-                  <option value="">Select Time Slot</option>
-                  {bookingSlots.map((slot) => (
-                    <option key={slot}>{slot}</option>
-                  ))}
-                </select>
-
-                <select
-                  className="w-full border border-slate-300 rounded-2xl px-4 py-3"
-                  value={booking.sessionType}
-                  onChange={(e) =>
-                    handleBookingChange("sessionType", e.target.value)
-                  }
-                >
-                  <option value="">Practice Type</option>
-                  <option>Batting Practice</option>
-                  <option>Bowling Practice</option>
-                  <option>Surface Practice</option>
-                </select>
-              </div>
+              <select
+                className="w-full border border-slate-300 rounded-2xl px-4 py-3"
+                value={booking.slot}
+                onChange={(e) => handleBookingChange("slot", e.target.value)}
+              >
+                <option value="">Select Time Slot</option>
+                {bookingSlots.map((slot) => (
+                  <option key={slot}>{slot}</option>
+                ))}
+              </select>
 
               <input
                 className="w-full border border-slate-300 rounded-2xl px-4 py-3"
@@ -368,8 +398,7 @@ Phone: ${booking.phone || "-"}`;
           </div>
           <div>
             <h4 className="text-white font-semibold mb-3">Contact</h4>
-            <p className="text-sm">Phone: +91 XXXXX XXXXX</p>
-            <p className="text-sm">Email: academy@email.com</p>
+            <p className="text-sm">Phone: +91 8555-973913</p>
             <p className="text-sm">Location: Hyderabad, India</p>
           </div>
         </div>
