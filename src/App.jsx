@@ -1,15 +1,20 @@
+import { useMemo, useState } from "react";
+
 const trainingPrograms = [
   {
     title: "Junior Development",
-    description: "For young players building strong basics in batting, bowling, fitness, and coordination.",
+    description:
+      "For young players building strong basics in batting, bowling, fitness, and coordination.",
   },
   {
     title: "Performance Training",
-    description: "Structured sessions for serious players focused on advanced drills, match awareness, and consistency.",
+    description:
+      "Structured sessions for serious players focused on advanced drills, match awareness, and consistency.",
   },
   {
     title: "1-to-1 Coaching",
-    description: "Personalized sessions for batting, bowling, wicketkeeping, and skill-specific improvement.",
+    description:
+      "Personalized sessions for batting, bowling, wicketkeeping, and skill-specific improvement.",
   },
 ];
 
@@ -22,7 +27,106 @@ const bookingSlots = [
   "7:00 PM – 8:00 PM",
 ];
 
+const whatsappNumber = "919999999999";
+
 export default function App() {
+  const [registration, setRegistration] = useState({
+    playerName: "",
+    guardianName: "",
+    phone: "",
+    email: "",
+    age: "",
+    skillLevel: "",
+    program: "",
+    goals: "",
+  });
+
+  const [booking, setBooking] = useState({
+    playerName: "",
+    date: "",
+    slot: "",
+    sessionType: "",
+    phone: "",
+  });
+
+  const [registrationMessage, setRegistrationMessage] = useState("");
+  const [bookingMessage, setBookingMessage] = useState("");
+
+  const registrationWhatsappLink = useMemo(() => {
+    const text = `Hello, I would like to register for the academy.
+
+Player Name: ${registration.playerName || "-"}
+Parent / Guardian Name: ${registration.guardianName || "-"}
+Phone: ${registration.phone || "-"}
+Email: ${registration.email || "-"}
+Age: ${registration.age || "-"}
+Skill Level: ${registration.skillLevel || "-"}
+Preferred Program: ${registration.program || "-"}
+Goals: ${registration.goals || "-"}`;
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+  }, [registration]);
+
+  const bookingWhatsappLink = useMemo(() => {
+    const text = `Hello, I would like to book a cricket net.
+
+Player Name: ${booking.playerName || "-"}
+Date: ${booking.date || "-"}
+Time Slot: ${booking.slot || "-"}
+Session Type: ${booking.sessionType || "-"}
+Phone: ${booking.phone || "-"}`;
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+  }, [booking]);
+
+  function handleRegistrationChange(field, value) {
+    setRegistration((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  }
+
+  function handleBookingChange(field, value) {
+    setBooking((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  }
+
+  function submitRegistration(e) {
+    e.preventDefault();
+
+    if (
+      !registration.playerName.trim() ||
+      !registration.guardianName.trim() ||
+      !registration.phone.trim() ||
+      !registration.email.trim() ||
+      !registration.age.trim() ||
+      !registration.skillLevel.trim() ||
+      !registration.program.trim()
+    ) {
+      setRegistrationMessage("Please fill in all required registration fields.");
+      return;
+    }
+
+    setRegistrationMessage("Registration details are ready. You can now send them on WhatsApp.");
+  }
+
+  function submitBooking(e) {
+    e.preventDefault();
+
+    if (
+      !booking.playerName.trim() ||
+      !booking.date.trim() ||
+      !booking.slot.trim() ||
+      !booking.sessionType.trim() ||
+      !booking.phone.trim()
+    ) {
+      setBookingMessage("Please fill in all required booking fields.");
+      return;
+    }
+
+    setBookingMessage("Booking details are ready. You can now confirm them on WhatsApp.");
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <header className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-green-800 text-white">
@@ -116,7 +220,9 @@ export default function App() {
 
       <section className="mx-auto max-w-7xl px-6 py-16 md:py-20">
         <div className="mb-10 text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-700">What this website helps with</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-700">
+            What this website helps with
+          </p>
           <h2 className="mt-3 text-3xl font-bold md:text-4xl">Simple systems for academy growth</h2>
           <p className="mx-auto mt-4 max-w-2xl text-slate-600">
             This website can help the academy manage player registrations, showcase coaching programs, and simplify
@@ -173,8 +279,7 @@ export default function App() {
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-700">Academy Registration</p>
             <h2 className="mt-3 text-3xl font-bold md:text-4xl">Register for coaching</h2>
             <p className="mt-4 max-w-xl text-slate-600">
-              This section lets players or parents submit key details to join the academy. It can later be connected to
-              Google Forms, email, or a full database.
+              This section lets players or parents submit key details to join the academy and send them directly through WhatsApp.
             </p>
 
             <div className="mt-8 rounded-[28px] bg-white p-6 shadow-soft">
@@ -188,37 +293,80 @@ export default function App() {
             </div>
           </div>
 
-          <form className="rounded-[28px] bg-white p-6 shadow-soft md:p-8">
+          <form onSubmit={submitRegistration} className="rounded-[28px] bg-white p-6 shadow-soft md:p-8">
             <div className="grid gap-4">
-              <Input placeholder="Player Name" />
-              <Input placeholder="Parent / Guardian Name" />
-              <Input placeholder="Phone Number" />
-              <Input placeholder="Email Address" />
+              <Input
+                placeholder="Player Name"
+                value={registration.playerName}
+                onChange={(e) => handleRegistrationChange("playerName", e.target.value)}
+              />
+              <Input
+                placeholder="Parent / Guardian Name"
+                value={registration.guardianName}
+                onChange={(e) => handleRegistrationChange("guardianName", e.target.value)}
+              />
+              <Input
+                placeholder="Phone Number"
+                value={registration.phone}
+                onChange={(e) => handleRegistrationChange("phone", e.target.value)}
+              />
+              <Input
+                placeholder="Email Address"
+                value={registration.email}
+                onChange={(e) => handleRegistrationChange("email", e.target.value)}
+              />
               <div className="grid gap-4 sm:grid-cols-2">
-                <Input placeholder="Age" />
-                <select className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-green-600">
-                  <option>Skill Level</option>
+                <Input
+                  placeholder="Age"
+                  value={registration.age}
+                  onChange={(e) => handleRegistrationChange("age", e.target.value)}
+                />
+                <select
+                  value={registration.skillLevel}
+                  onChange={(e) => handleRegistrationChange("skillLevel", e.target.value)}
+                  className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-green-600"
+                >
+                  <option value="">Skill Level</option>
                   <option>Beginner</option>
                   <option>Intermediate</option>
                   <option>Advanced</option>
                 </select>
               </div>
-              <select className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-green-600">
-                <option>Preferred Program</option>
+              <select
+                value={registration.program}
+                onChange={(e) => handleRegistrationChange("program", e.target.value)}
+                className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-green-600"
+              >
+                <option value="">Preferred Program</option>
                 <option>Junior Development</option>
                 <option>Performance Training</option>
                 <option>1-to-1 Coaching</option>
               </select>
               <textarea
+                value={registration.goals}
+                onChange={(e) => handleRegistrationChange("goals", e.target.value)}
                 className="min-h-[120px] w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-green-600"
                 placeholder="Goals / Additional Details"
               />
               <button
-                type="button"
+                type="submit"
                 className="mt-2 rounded-2xl bg-green-700 px-6 py-3 font-semibold text-white transition hover:bg-green-800"
               >
-                Submit Registration
+                Prepare Registration
               </button>
+
+              {registrationMessage && (
+                <p className="text-sm font-medium text-green-700">{registrationMessage}</p>
+              )}
+
+              <a
+                href={registrationWhatsappLink}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-2xl bg-slate-900 px-6 py-3 font-semibold text-white transition hover:bg-slate-800"
+              >
+                Send Registration on WhatsApp
+              </a>
             </div>
           </form>
         </div>
@@ -230,8 +378,7 @@ export default function App() {
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-700">Cricket Net Booking</p>
             <h2 className="mt-3 text-3xl font-bold md:text-4xl">Reserve your practice slot</h2>
             <p className="mt-4 max-w-xl text-slate-600">
-              Players can book a net by choosing a date, preferred time slot, and session type. This can later connect
-              to WhatsApp, Google Sheets, or a booking backend.
+              Players can fill in their slot details and send the booking request directly through WhatsApp.
             </p>
 
             <div className="mt-8 rounded-[28px] bg-white p-6 shadow-soft">
@@ -253,34 +400,67 @@ export default function App() {
             </div>
           </div>
 
-          <form className="rounded-[28px] bg-white p-6 shadow-soft md:p-8">
+          <form onSubmit={submitBooking} className="rounded-[28px] bg-white p-6 shadow-soft md:p-8">
             <div className="grid gap-4">
-              <Input placeholder="Player Name" />
-              <Input type="date" />
+              <Input
+                placeholder="Player Name"
+                value={booking.playerName}
+                onChange={(e) => handleBookingChange("playerName", e.target.value)}
+              />
+              <Input
+                type="date"
+                value={booking.date}
+                onChange={(e) => handleBookingChange("date", e.target.value)}
+              />
               <div className="grid gap-4 sm:grid-cols-2">
-                <select className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-green-600">
-                  <option>Select Time Slot</option>
+                <select
+                  value={booking.slot}
+                  onChange={(e) => handleBookingChange("slot", e.target.value)}
+                  className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-green-600"
+                >
+                  <option value="">Select Time Slot</option>
                   {bookingSlots.map((slot) => (
                     <option key={slot}>{slot}</option>
                   ))}
                 </select>
 
-                <select className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-green-600">
-                  <option>Session Type</option>
+                <select
+                  value={booking.sessionType}
+                  onChange={(e) => handleBookingChange("sessionType", e.target.value)}
+                  className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-green-600"
+                >
+                  <option value="">Session Type</option>
                   <option>Batting Practice</option>
                   <option>Bowling Practice</option>
                   <option>Match Simulation</option>
                 </select>
               </div>
 
-              <Input placeholder="Phone Number" />
+              <Input
+                placeholder="Phone Number"
+                value={booking.phone}
+                onChange={(e) => handleBookingChange("phone", e.target.value)}
+              />
 
               <button
-                type="button"
-                className="mt-2 rounded-2xl bg-slate-900 px-6 py-3 font-semibold text-white transition hover:bg-slate-800"
+                type="submit"
+                className="mt-2 rounded-2xl bg-green-700 px-6 py-3 font-semibold text-white transition hover:bg-green-800"
               >
-                Confirm Booking
+                Prepare Booking
               </button>
+
+              {bookingMessage && (
+                <p className="text-sm font-medium text-green-700">{bookingMessage}</p>
+              )}
+
+              <a
+                href={bookingWhatsappLink}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-2xl bg-slate-900 px-6 py-3 font-semibold text-white transition hover:bg-slate-800"
+              >
+                Confirm Booking on WhatsApp
+              </a>
             </div>
           </form>
         </div>
@@ -292,13 +472,16 @@ export default function App() {
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-100">Quick Contact</p>
             <h2 className="mt-3 text-3xl font-bold">Want a quick demo or booking?</h2>
             <p className="mt-3 max-w-2xl text-green-100">
-              Add the academy WhatsApp number here so parents and players can connect instantly for registrations,
-              schedule questions, and slot confirmations.
+              This button can be connected to the academy’s real WhatsApp number.
             </p>
           </div>
 
           <a
-            href="#"
+            href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+              "Hello, I would like to know more about the cricket academy."
+            )}`}
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center justify-center rounded-2xl bg-white px-6 py-3 font-semibold text-slate-900 transition hover:-translate-y-0.5"
           >
             Chat on WhatsApp
@@ -329,7 +512,14 @@ export default function App() {
                 </a>
               </li>
               <li>
-                <a href="#" className="transition hover:text-white">
+                <a
+                  href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+                    "Hello, I would like to know more about the cricket academy."
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition hover:text-white"
+                >
                   Contact
                 </a>
               </li>
@@ -364,11 +554,13 @@ function InfoBox({ text }) {
   return <div className="rounded-2xl bg-slate-50 p-4 text-slate-700">{text}</div>;
 }
 
-function Input({ type = "text", placeholder = "" }) {
+function Input({ type = "text", placeholder = "", value = "", onChange = () => {} }) {
   return (
     <input
       type={type}
       placeholder={placeholder}
+      value={value}
+      onChange={onChange}
       className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-green-600"
     />
   );
